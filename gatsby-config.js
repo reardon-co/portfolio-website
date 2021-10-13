@@ -16,5 +16,13 @@ module.exports = {
       },
       __key: "images",
     },
+    {
+      resolve: "gatsby-plugin-web-font-loader",
+      options: {
+        google: {
+          families: ['Quicksand', 'sans-serif', 'Source Code Pro', 'monospace'],
+        },
+      },
+    },
   ],
 };
