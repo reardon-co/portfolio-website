@@ -175,6 +175,5 @@ export default function FlickerText({ start, phrases, characters, seconds }) {
     }, seconds * 1000);
     return () => clearInterval(interval);
   });
-
   return <div>{text}</div>;
 }

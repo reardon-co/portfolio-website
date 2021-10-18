@@ -3,15 +3,15 @@ import styled from 'styled-components';
 
 const Page = styled.div`
   height: 100vh;
-  width: 60vw;
-  display: flex;
-  padding-left: 20vw;
-  padding-right: 20vw;
+  width: 100vw;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-column-gap: 1vw;
 `;
 
-export default function PageLayout({ children }) {
+export default function PageLayout({ children, id }) {
     return (
-        <Page>
+        <Page id={id}>
             {children}
         </Page>
     )

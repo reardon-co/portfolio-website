@@ -23,24 +23,22 @@ const CenterShell = styled.div`
   width: auto;
   display: flex;
   align-items: center;
+  grid-column: 4 / 10;
 `;
 
-function HeroLayout({ children, introSummary }) {
+function HeroLayout({ children, introSummary, flickerStart, flickerPhrases, flickerCharacters }) {
   return (
-    <div>
       <CenterShell>
         <div>
             <SubtitleText>Hello, my name is</SubtitleText>
             <TitleText>Cole Reardon, a</TitleText>
             <FlickerStyle>
-              <FlickerText start={"Software Developer"} />
+              <FlickerText start={ flickerStart } phrases={ flickerPhrases } characters={ flickerCharacters } />
             </FlickerStyle>
             <div>{introSummary}</div>
           <ResumeButton />
         </div>
       </CenterShell>
-      <div>{children}</div>
-    </div>
   );
 }
 
