@@ -10,13 +10,15 @@ const StyledDiv = styled.div`
 `;
 
 const EmphasisText = styled.span`
-    color: #dda1f6;
+  color: #dda1f6;
 `;
 export default function ContactInfo() {
   return (
     <StyledDiv>
-        <Title><EmphasisText>4. </EmphasisText> Contact</Title>
-        <br />
+      <Title>
+        <EmphasisText>4. </EmphasisText> Contact
+      </Title>
+      <br />
       <ContactForm />
     </StyledDiv>
   );

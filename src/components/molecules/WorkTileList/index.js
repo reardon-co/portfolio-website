@@ -3,10 +3,10 @@ import styled from "styled-components";
 import WorkTile from "../WorkTile";
 
 const StyledDiv = styled.div`
-    display: flex;
-    flex-direction: row;
-    column-gap: 1vw;
-    overflow-x: scroll;
+  display: flex;
+  flex-direction: row;
+  column-gap: 1vw;
+  overflow-x: scroll;
 `;
 export default function WorkTileList({ workTiles }) {
   return (

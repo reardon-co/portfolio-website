@@ -3,10 +3,10 @@ import styled from "styled-components";
 import ProjectTile from "../ProjectTile";
 
 const StyledDiv = styled.div`
-    display: flex;
-    flex-direction: row;
-    column-gap: 1vw;
-    overflow-x: scroll;
+  display: flex;
+  flex-direction: row;
+  column-gap: 1vw;
+  overflow-x: scroll;
 `;
 export default function ProjectTileList({ projectTiles }) {
   return (
