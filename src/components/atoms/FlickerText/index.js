@@ -30,6 +30,11 @@ export default function FlickerText({ start, phrases, characters, speed, delay, 
       "Solutions Innovator",
       "Northeastern Student",
       "Web Developer",
+      "Team Leader",
+      "Self Starter",
+      "Quick Learner",
+      "Computer Scientist",
+      "Multiskilled Programmer"
     ];
   }
   if (typeof characters == "undefined") {
