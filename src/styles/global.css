@@ -1,9 +1,10 @@
-html, body {
-    height: 100%;
-    width: 100%;
-    margin: 0px;
-    padding: 0px;
-    background-color: #2B2D37;
-    color: #F5FAFE;
-    font-family: "Source Code Pro", "monospace";
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+  background-color: #2b2d37;
+  color: #f5fafe;
+  font-family: "Montserrat", sans-serif;
 }
