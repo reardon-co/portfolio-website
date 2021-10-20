@@ -20,7 +20,7 @@ module.exports = {
       resolve: "gatsby-plugin-web-font-loader",
       options: {
         google: {
-          families: ['Quicksand', 'sans-serif', 'Source Code Pro', 'monospace'],
+          families: ['Quicksand', 'sans-serif', 'Source Code Pro', 'monospace', 'Varela Round', 'Montserrat'],
         },
       },
     },

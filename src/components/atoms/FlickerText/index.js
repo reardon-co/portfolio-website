@@ -14,11 +14,13 @@ import { useState, useEffect } from "react";
  * @param {String} start - the starting phrase for the flickering text
  * @param {String[]} phrases - The list of available phrases to sort through
  * @param {char[]} characters - The list of characters to be used to cause the 'flicker'
- * @param {int} seconds The amount of seconds between each word transition
+ * @param {int} speed The amount of seconds between each word transition
+ * @param {int} delay The amount of miliseconds between each letter transition
+ * @param {int} spaceNumber For formatting reasons, the pigger the font, the more spaces are required to make the animation smoother
  * @returns A react component that renders the text
  */
 
-export default function FlickerText({ start, phrases, characters, seconds }) {
+export default function FlickerText({ start, phrases, characters, speed, delay, spaceNumber }) {
 
   // Initialization of props
   if (typeof phrases == "undefined") {
@@ -36,11 +38,15 @@ export default function FlickerText({ start, phrases, characters, seconds }) {
   if (typeof start == "undefined") {
     start = "Software Developer";
   }
-  if (typeof seconds == "undefined") {
-    seconds = 3;
+  if (typeof speed == "undefined") {
+    speed = 3;
   }
-
-  const timerDelay = 15;
+  if (typeof delay == "undefined") {
+      delay = 15;
+  }
+  if (typeof spaceNumber == "undefined") {
+    spaceNumber = 1;
+  }
 
   // Initializing of states
   const [text, setText] = useState(start);
@@ -53,6 +59,9 @@ export default function FlickerText({ start, phrases, characters, seconds }) {
 
   // Gets a random index when given a list
   const getRandomIndex = (list) => Math.floor(Math.random() * list.length);
+
+  // Gets the correct amount of spaces for a the string
+  const getSpaces = (num) => { return "\xa0".repeat(num)}
 
   /**
    * Sets the state of the text from full english text to random characters of the same length
@@ -73,7 +82,7 @@ export default function FlickerText({ start, phrases, characters, seconds }) {
       indexesLeft.splice(indexesLeft.indexOf(selectedIndex), 1);
 
       setText(phraseArr.join(""));
-      await timer(timerDelay);
+      await timer(delay);
     }
 
     return phraseArr.join("");
@@ -92,12 +101,12 @@ export default function FlickerText({ start, phrases, characters, seconds }) {
     while (indexesLeft.length > 0) {
       let selectedIndex = indexesLeft[getRandomIndex(indexesLeft)];
 
-      scrambleCharArray.splice(selectedIndex, 1, "\xa0");
+      scrambleCharArray.splice(selectedIndex, 1, getSpaces(spaceNumber));
 
       indexesLeft.splice(indexesLeft.indexOf(selectedIndex), 1);
 
       setText(scrambleCharArray.join(""));
-      await timer(timerDelay);
+      await timer(delay);
     }
 
     return scrambleCharArray.join("");
@@ -110,7 +119,7 @@ export default function FlickerText({ start, phrases, characters, seconds }) {
    */
   const emptyToFullScramble = async () => {
     let newPhrase = phrases[getRandomIndex(phrases)];
-    let newPhraseArr = Array(newPhrase.length).fill("\xa0");
+    let newPhraseArr = Array(newPhrase.length).fill(getSpaces(spaceNumber));
     let indexesLeft = Array.from(Array(newPhraseArr.length).keys());
 
     while (indexesLeft.length > 0) {
@@ -122,7 +131,7 @@ export default function FlickerText({ start, phrases, characters, seconds }) {
       indexesLeft.splice(indexesLeft.indexOf(selectedIndex), 1);
 
       setText(newPhraseArr.join(""));
-      await timer(timerDelay);
+      await timer(delay);
     }
 
     return [newPhraseArr.join(""), newPhrase];
@@ -147,7 +156,7 @@ export default function FlickerText({ start, phrases, characters, seconds }) {
       indexesLeft.splice(indexesLeft.indexOf(selectedIndex), 1);
 
       setText(scrambledPhraseArr.join(""));
-      await timer(timerDelay);
+      await timer(delay);
     }
     return setText(scrambledPhraseArr.join(""));
   };
@@ -165,6 +174,7 @@ export default function FlickerText({ start, phrases, characters, seconds }) {
     }
     textPhrase = await fullPhraseToFlicker(textPhrase);
     textPhrase = await fullScrambleToEmpty(textPhrase);
+    await timer(delay * 25)
     let tempValue = await emptyToFullScramble();
     textPhrase = await fullScrambleToFullText(tempValue[0], tempValue[1]);
   };
@@ -172,7 +182,7 @@ export default function FlickerText({ start, phrases, characters, seconds }) {
   useEffect(() => {
     const interval = setInterval(() => {
       loopAnimation();
-    }, seconds * 1000);
+    }, speed * 1000);
     return () => clearInterval(interval);
   });
   return <div>{text}</div>;
